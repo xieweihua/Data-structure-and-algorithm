@@ -1,8 +1,8 @@
 hash
 =======
 
-hlist: 移植自linux内核, windows平台可用(可单独使用，但一般应用与hash表)
-mempory pool : nginx 内存模块(可单独使用)
+  - hlist: 移植自linux内核, windows平台可用(可单独使用，但一般应用与hash表)
+  - mempory pool : nginx 内存模块(可单独使用)
 
 由于windows没有typeof， 故WIN32下:
 
