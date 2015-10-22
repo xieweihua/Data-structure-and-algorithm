@@ -7,8 +7,8 @@ Boost:  scoped_ptr、shared_ptr、scoped_array、shared_array、weak_ptr、intru
 auto_ptr对象所有权是独占。 注意事项：
  - 不能同时出现两个auto_ptr指向同一个object。
  - 不能把同一个object赋值给不同的auto_ptr。
- -	不能将auto_ptr放入容器。
- -不能通过复制操作来初始化auto_ptr
+ - 不能将auto_ptr放入容器。
+ - 不能通过复制操作来初始化auto_ptr
  
  ```c
 		std::auto_ptr<int> p(new int(42)); //OK
@@ -22,13 +22,16 @@ auto_ptr对象所有权是独占。 注意事项：
 ##unique_ptr
 PS: std::auto_ptr在最新的c++11标准草案中被std::unique_ptr取代, 
 两者区别：
- -auto_ptr有拷贝语义，拷贝后源对象变得无效；unique_ptr则无拷贝语义，但提供了移动语义
- -auto_ptr不可作为容器元素，unique_ptr可以作为容器元素
- -auto_ptr不可指向动态数组(尽管不会报错，但不会表现出正确行为)，unique_ptr可以指向动态数组
- -unique_ptr默认的资源删除操作是delete/delete[]，若需要，可以进行自定义
- -void end_connection(connection *p) { disconnect(*p); } //资源清理函数  
- -unique_ptr<connection, decltype(end_connection)*> //资源清理器的“类型”  
- -p(&c, end_connection);// 传入函数名，会自动转换为函数指针 
+ - auto_ptr有拷贝语义，拷贝后源对象变得无效；unique_ptr则无拷贝语义，但提供了移动语义
+ - auto_ptr不可作为容器元素，unique_ptr可以作为容器元素
+ - auto_ptr不可指向动态数组(尽管不会报错，但不会表现出正确行为)，unique_ptr可以指向动态数组
+ - unique_ptr默认的资源删除操作是delete/delete[]，若需要，可以进行自定义
+ 
+ ```c
+ void end_connection(connection *p) { disconnect(*p); } //资源清理函数  
+ unique_ptr<connection, decltype(end_connection)*> //资源清理器的“类型”  
+ p(&c, end_connection);// 传入函数名，会自动转换为函数指针 
+```
 
 使用例子：
 ```c
